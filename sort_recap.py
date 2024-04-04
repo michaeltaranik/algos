@@ -21,11 +21,10 @@ def heap_sort(arr):
 
     for j in range(end - 1, -1, -1):
         arr[0], arr[j] =  arr[j], arr[0] 
-        heapify(arr, j - 1, end)
-
+        heapify(arr, 0, j)
     return arr
 
-print(heap_sort([90,10,30,20,50,70,40,30,40,100,50]))
+#print(heap_sort([90,10,30,20,50,70,40,30,40,100,50]))
 
 def partition(arr, low, high):
     j = low - 1
@@ -106,3 +105,66 @@ H = [3, 7, 3, 2, 9, 5, 9, 8, 5, 2, 9, 4, 7, 3, 9]
 # print(arr)
 # arr = (max_heap_insert(arr, 9))
 # print(arr)
+
+# def rotate_inplace(arr, k):
+#     previous = len(arr) - 1
+#     current = previous - k
+#     end = len(arr)
+#     copy_prev = arr[previous]
+#     while end > 0:
+#         copy_current = arr[current]
+#         arr[current] = copy_prev
+#         previous = current
+#         copy_prev = copy_current
+#         current = current - k
+#         if current < 0:
+#             current = len(arr) + current
+#         end -= 1
+#     return arr
+
+
+# exercise 243
+def reverse(arr, start, end):
+    while start < end:
+        arr[start], arr[end] = arr[end], arr[start]
+        start += 1
+        end -= 1
+
+def rotate_inplace(arr, k):
+    n = len(arr)
+    k = k % n  
+    reverse(arr, 0, k - 1) 
+    reverse(arr, k, n - 1)  
+    reverse(arr, 0, n - 1) 
+    return arr
+
+# print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 0))
+# print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 1))
+# print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 2))
+# print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3))
+# print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 4))
+
+# exercise 244
+def increasing(arr):
+    for i in range(0, len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+def decreasing(arr):
+    for i in range(0, len(arr) - 1):
+        if arr[i] < arr[i + 1]:
+            return False
+def is_sorted(arr):
+    if increasing(arr) == False and decreasing(arr) == False:
+        return False
+    else:
+        return True
+
+
+# print(is_sorted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+# print(is_sorted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
+# print(is_sorted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+# print(is_sorted([3, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+
+
+
+
