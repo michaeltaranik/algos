@@ -79,19 +79,20 @@ def mountain_sort(A):
 
 
 def square_root(n):
-    def binary_search(low, high):
-        while low <= high:
-            middle = (high + low) // 2
-            if middle * middle > n:
-                high = middle
-            elif middle * middle <= n and (middle + 1) * (middle + 1) > n :
-                return middle
-            else:
-                low = middle + 1
-    sqrt = binary_search(0, n)
-    return sqrt
+    min = -1
+    max = n + 1
+    middle = (min + max) // 2
+    while min < max:
+        middle = (min + max) // 2
+        if middle * middle < n:
+            min = middle + 1
+        if middle * middle > n:
+            max = middle
+        if middle * middle == n:
+            return middle
+    return middle
      
-#print(square_root(196))
+# print(square_root(196))
 
 
 
@@ -167,7 +168,185 @@ def find_sum_el(A):
 
 #print(find_sum_el([1,2,3,4,0,0,0,0,0,0,11,0,0,0,1,1])) 
 
+def reverse(arr, begin, end):
+    while begin < end:
+        arr[begin], arr[end] = arr[end], arr[begin]
+        begin += 1
+        end -= 1
+
+
+def rotate_inplace(arr, k):
+    n = len(arr)
+    k = k % n
+    reverse(arr, 0, k - 1)
+    reverse(arr, k, n - 1)
+    reverse(arr, 0, n - 1)
+    return arr
+
+# print(rotate_inplace([1,2,3,4,5,6,7,8,9], 4))
+
+
+# Exercise 228
+def binary_search_bound(arr, left, right, x):
+    while right - left > 1:
+        middle = (left + right) // 2
+        if arr[middle] > x:
+            right = middle
+        if arr[middle] < x:
+            left = middle
+        if arr[middle] == x:
+            return arr[middle]
+    return arr[middle]
+
+def lower_bound(arr, x):
+    left = -1
+    right = len(arr)
+    lower = binary_search_bound(arr, left, right, x)
+    if lower < x:
+        return "not found"
+    else:
+        return lower
+
+# print(lower_bound([1,2,3,4,5,6,8,9], 7))
+# print(lower_bound([1,2,3,4,5,6,7,8,9], 1))
+# print(lower_bound([1,2,3,4,5,6,7,8,9], 100))
+# print(lower_bound([1,2,3,4,5,6,7,8,9], 9))
+# print(lower_bound([1,2,3,4,5,6,7,8,9], 0))
+    
+
+# Exercise 224
+def partition_zero(arr):
+    j = 0
+    for i in range(0, len(arr)):
+        if arr[i] < 0:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1
+    
+    for i in range(j - 1, len(arr)):
+        if arr[i] == 0:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1
+    
+    return arr
+
+# print(partition_zero([2, 5, 0, -1, 3, -7, 0, 3, -1, 10]))
+
+# Exercise 208
+def sort_special(arr):
+    a = arr[0]
+    d = c = b = a
+    i = 1
+    while arr[i] == a:
+        i += 1
+    b = arr[i]
+    while arr[i] == a or arr[i] == b:
+        i += 1
+    c = arr[i]
+    while arr[i] == a or arr[i] == b or arr[i] == c:
+        i += 1
+    d = arr[i]
+    j = 0
+    for i in range(0, len(arr)):
+        if arr[i] == a:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1
+    for i in range(0, len(arr)):
+        if arr[i] == b:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1
+    for i in range(0, len(arr)):
+        if arr[i] == c:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1
+    for i in range(0, len(arr)):
+        if arr[i] == d:
+            arr[i], arr[j] = arr[j], arr[i]
+            j += 1 
+    return arr
+
+  
+
+# print(sort_special([1,2,3,4,1,2,3,4,1,2,3,4,2,1,3,4]))
+
+
+# Exercise 205
+def sum_of_three(arr, s):
+    quick_sort(arr, 0, len(arr) - 1, False)
+    for i in range(0, len(arr)):
+        j = 0
+        k = len(arr) - 1
+        while j < k:
+            if i == j:
+                j += 1
+            elif i == k:
+                k -= 1
+            elif arr[i] + arr[j] + arr[k] == s:
+                return True
+            elif arr[i] + arr[j] + arr[k] > s:
+                 k -= 1
+            else:
+                j += 1
+    return False  
+
+# print(sum_of_three([1,3,8], 10))
+# print(sum_of_three([1,3,8], 12))
+# print(sum_of_three([8, 12, 3, 9, 1, 4], 10))
+
+# Exercise 193
+def maximal_distance(arr):
+    if len(arr) < 2:
+        return 0
+    min = arr[0]
+    max = arr[0]
+    for i in range(0, len(arr)):
+        if arr[i] < min:
+            min = arr[i]
+        if arr[i] > max:
+            max = arr[i]
+    return max - min 
+
+# print(maximal_distance([1,2,3,4,5,6,7,8,9]))
+
+# Queue
+Q = [None]*100   # fixed-size array to store the elements in the queue
+
+Front = 0        # points to the element that is in front of the queue
+
+Back = 0         # points to the first element past the last in the
+                 # queue, which is where you would enqueue the next
+                 # element
+
+def next(p):
+    global Q
+    p = p + 1
+    if p == len(Q):
+        p = 0
+    return p
+
+def is_empty():
+    global Front, Back
+    return Front == Back
+
+def is_full():
+    global Front, Back
+    return next(Back) == Front
+
+def enqueue(x):
+    global Q, Front, Back
+    if is_full():
+        print('queue full')
+    else:
+        Q[Back] = x
+        Back = next(Back)
+
+def dequeue():
+    global Q, Front, Back
+    if is_empty():
+        print('queue empty')
+    else:
+        x = Q[Front]
+        Front = next(Front)
+        return x
 
 
 
-# git commit -m "midterm"
