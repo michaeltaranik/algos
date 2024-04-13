@@ -153,11 +153,24 @@ def check_square_root(arr):
         print(square_root(arr[i]))
         i += 1
 
-square_roots = [0, 1, 2, 3, 9, 10, 11, 25]
-check_square_root(square_roots)
+# square_roots = [0, 1, 2, 3, 9, 10, 11, 25]
+# check_square_root(square_roots)
 
 
 # Exercise 4:
+def min_heap_add(H, x):
+    H.append(x)
+    new = len(H) - 1
+    parent = (new - 1) // 2
+    while H[new] < H[parent]:
+         H[new], H[parent] = H[parent], H[new]
+         new = parent
+         parent = (new - 1) // 2
+    return H
+          
+H = [3,5,5,6,10,6,8,6,7,20,11,17,9,9,10]
+# print(H)
+# print(min_heap_add(H, 4))
 
 
 
