@@ -5,14 +5,15 @@ def partition(arr, begin, end, decreasing):
     for i in range(begin, end):
         if decreasing:
             if arr[i] >= pivot:
-                j +=1
+                j += 1
                 arr[i], arr[j] = arr[j], arr[i]
         else:
             if arr[i] <= pivot:
-                j +=1
+                j += 1
                 arr[i], arr[j] = arr[j], arr[i]
     arr[end], arr[j + 1] = arr[j + 1], arr[end]
     return j + 1
+
 
 def quick_sort(arr, begin, end, decreasing):
     if begin < end:
@@ -33,29 +34,33 @@ A = [8, 2, 5, -12, 2, 11, -15, -8, -1, 12]
 # print(mountain_sort(A))
 
 
-
 # Exercise 2
 # Question 1:
 # Algo_x returns number of original elements in the array, i.e. elements
-# that we can encounter only once 
+# that we can encounter only once
 # arr = [1,2,3,4,4,4], x = 3 (1,2,3 = x, 4 has copies)
 # Question 2:
-# comlexity of the algorithm is quadratic, there is also a difference 
-# between best-case and worst-case scenario, namely best-case is when 
+# comlexity of the algorithm is quadratic, there is also a difference
+# between best-case and worst-case scenario, namely best-case is when
 # all elements of the array are the same, in this case complexity is linear
 # because in principle while-loop is not being used.
 # Worst-case, on the other hand, is when all elements are unique,
 # then while-loop is going through the whole cycle, thus complexity is quadratic.
 
+
 def better_algo_x(arr):
     quick_sort(arr, 0, len(arr) - 1, False)
     count = 0
     for i in range(0, len(arr)):
-        if (i == 0 or arr[i - 1] != arr[i]) and (i == len(arr) - 1 or arr[i + 1] != arr[i]):
+        if (i == 0 or arr[i - 1] != arr[i]) and (
+            i == len(arr) - 1 or arr[i + 1] != arr[i]
+        ):
             count += 1
     return count
 
+
 # print(better_algo_x([5,1,2,3,2,3,10,0]))
+
 
 # Exercise 3:
 # Question 1:
@@ -67,6 +72,7 @@ class Transaction:
     def __init__(self, date, amount):
         self.date = date
         self.amount = amount
+
 
 def print_all_transactions(arr_of_trans):
     i = 0
@@ -80,10 +86,11 @@ def partition_trans(arr, begin, end):
     pivot = arr[end].date
     for i in range(begin, end):
         if arr[i].date <= pivot:
-            j +=1
+            j += 1
             arr[i], arr[j] = arr[j], arr[i]
     arr[end], arr[j + 1] = arr[j + 1], arr[end]
     return j + 1
+
 
 def quick_sort_trans(arr, begin, end):
     if begin < end:
@@ -110,37 +117,39 @@ def better_algo_y(trans):
             j += 1
     return max
 
-accounting_system = [Transaction(12, 100),
-                     Transaction(23, 450),
-                     Transaction(10, 300), 
-                     Transaction(15, 900),
-                     Transaction(30, 1000),
-                     Transaction(34, 200),
-                     Transaction(1, 100)]
+
+accounting_system = [
+    Transaction(12, 100),
+    Transaction(23, 450),
+    Transaction(10, 300),
+    Transaction(15, 900),
+    Transaction(30, 1000),
+    Transaction(34, 200),
+    Transaction(1, 100),
+]
 
 # print_all_transactions(quick_sort_trans(accounting_system, 0, len(accounting_system) - 1))
 # print(better_algo_y(accounting_system))
-
 
 
 # Exercise 5:
 def square_root(n):
     low = 0
     high = n + 1
-    middle = (low + high) //2
+    middle = (low + high) // 2
 
     while low + 1 < high:
         middle = (low + high) // 2
 
         if middle * middle < n:
             low = middle
-            
+
         elif middle * middle > n:
             high = middle
 
         else:
             return middle
-        
+
     if middle * middle > n:
         return middle - 1
     else:
@@ -153,6 +162,7 @@ def check_square_root(arr):
         print(square_root(arr[i]))
         i += 1
 
+
 # square_roots = [0, 1, 2, 3, 9, 10, 11, 25]
 # check_square_root(square_roots)
 
@@ -163,26 +173,12 @@ def min_heap_add(H, x):
     new = len(H) - 1
     parent = (new - 1) // 2
     while H[new] < H[parent]:
-         H[new], H[parent] = H[parent], H[new]
-         new = parent
-         parent = (new - 1) // 2
+        H[new], H[parent] = H[parent], H[new]
+        new = parent
+        parent = (new - 1) // 2
     return H
-          
-H = [3,5,5,6,10,6,8,6,7,20,11,17,9,9,10]
+
+
+H = [3, 5, 5, 6, 10, 6, 8, 6, 7, 20, 11, 17, 9, 9, 10]
 # print(H)
 # print(min_heap_add(H, 4))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

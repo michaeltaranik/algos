@@ -5,17 +5,18 @@ def num_og_el(A):
             hash_map[A[i]] += 1
         else:
             hash_map[A[i]] = 1
-    x = 0 
+    x = 0
     for key in hash_map.keys():
         if hash_map[key] == 1:
             x += 1
     return x
 
-#print(num_og_el([1, 2, 3, 2, 4, 8]))
-#print(num_og_el([1, 2, 3, 2, 4, 4, 8]))
+
+# print(num_og_el([1, 2, 3, 2, 4, 8]))
+# print(num_og_el([1, 2, 3, 2, 4, 4, 8]))
 
 
-def algo_x(A,x):
+def algo_x(A, x):
     i = len(A) - 1
     j = 0
     while i >= 0:
@@ -28,7 +29,9 @@ def algo_x(A,x):
             j = j + 1
     return False
 
-#print(algo_x([1, 2, 3, 4, 5], 3))
+
+# print(algo_x([1, 2, 3, 4, 5], 3))
+
 
 def better_algo_x(A, x):
     A.sort()
@@ -38,8 +41,9 @@ def better_algo_x(A, x):
         return True
     return False
 
-#print(better_algo_x([1, 2, 3, 4, 5], 3))
-#print(better_algo_x([1,4,1,2,1,2,12,21,1,1], 10))
+
+# print(better_algo_x([1, 2, 3, 4, 5], 3))
+# print(better_algo_x([1,4,1,2,1,2,12,21,1,1], 10))
 
 
 def partition(arr, begin, end, reversed):
@@ -53,9 +57,10 @@ def partition(arr, begin, end, reversed):
         elif reversed == False:
             if arr[i] <= pivot:
                 j += 1
-                arr[j], arr[i] = arr[i], arr[j] 
+                arr[j], arr[i] = arr[i], arr[j]
     arr[j + 1], arr[end] = arr[end], arr[j + 1]
     return j + 1
+
 
 def quick_sort(arr, begin, end, reversed):
     if begin < end:
@@ -68,14 +73,17 @@ def quick_sort(arr, begin, end, reversed):
 def sorted(arr, reversed):
     return quick_sort(arr, 0, len(arr) - 1, reversed)
 
-#print(sorted([8, 2, 5, -12, 2, 11, -15, -8, -1, 12], False))
+
+# print(sorted([8, 2, 5, -12, 2, 11, -15, -8, -1, 12], False))
+
 
 def mountain_sort(A):
-    quick_sort(A, 0, len(A)//2, False)
-    quick_sort(A, len(A)//2, len(A) - 1, True)
+    quick_sort(A, 0, len(A) // 2, False)
+    quick_sort(A, len(A) // 2, len(A) - 1, True)
     return A
 
-#print(mountain_sort([8, 2, 5, -12, 2, 11, -15, -8, -1, 12]))
+
+# print(mountain_sort([8, 2, 5, -12, 2, 11, -15, -8, -1, 12]))
 
 
 def square_root(n):
@@ -91,9 +99,9 @@ def square_root(n):
         if middle * middle == n:
             return middle
     return middle
-     
-# print(square_root(196))
 
+
+# print(square_root(196))
 
 
 def find_the_difference(A, x):
@@ -110,7 +118,7 @@ def find_the_difference(A, x):
     return False
 
 
-#print(find_the_difference([1,2,3,4,5,8,10,15], 0))
+# print(find_the_difference([1,2,3,4,5,8,10,15], 0))
 
 
 def increasing_or_decreasing(A):
@@ -133,17 +141,28 @@ def increasing_or_decreasing(A):
             increasing = 0
             flat += 1
             decreasing = 0
-        previous_increasing = increasing if increasing > previous_increasing else previous_increasing
-        previous_decreasing = decreasing if decreasing > previous_decreasing else previous_decreasing
+        previous_increasing = (
+            increasing if increasing > previous_increasing else previous_increasing
+        )
+        previous_decreasing = (
+            decreasing if decreasing > previous_decreasing else previous_decreasing
+        )
         previous_flat = flat if flat > previous_flat else previous_flat
     if previous_increasing == previous_decreasing != 0:
         return "equal"
-    elif previous_increasing > previous_flat and previous_increasing > previous_decreasing:
+    elif (
+        previous_increasing > previous_flat
+        and previous_increasing > previous_decreasing
+    ):
         return "increasing"
-    elif previous_decreasing > previous_flat and previous_decreasing > previous_increasing:
+    elif (
+        previous_decreasing > previous_flat
+        and previous_decreasing > previous_increasing
+    ):
         return "decreasing"
     else:
         return "flat"
+
 
 # print(increasing_or_decreasing([1,1,1,1,1]))
 # print(increasing_or_decreasing([1,20,11,10,1,0]))
@@ -152,7 +171,8 @@ def increasing_or_decreasing(A):
 # print(increasing_or_decreasing([1,1,1,1,1]))
 # print(increasing_or_decreasing([1,2,1,2,1]))
 # print(increasing_or_decreasing([1,2,1,2,10,1]))
-    
+
+
 def find_sum_el(A):
     max_index = 0
     for i in range(0, len(A)):
@@ -166,7 +186,9 @@ def find_sum_el(A):
         return True
     return False
 
-#print(find_sum_el([1,2,3,4,0,0,0,0,0,0,11,0,0,0,1,1])) 
+
+# print(find_sum_el([1,2,3,4,0,0,0,0,0,0,11,0,0,0,1,1]))
+
 
 def reverse(arr, begin, end):
     while begin < end:
@@ -183,6 +205,7 @@ def rotate_inplace(arr, k):
     reverse(arr, 0, n - 1)
     return arr
 
+
 # print(rotate_inplace([1,2,3,4,5,6,7,8,9], 4))
 
 
@@ -198,6 +221,7 @@ def binary_search_bound(arr, left, right, x):
             return arr[middle]
     return arr[middle]
 
+
 def lower_bound(arr, x):
     left = -1
     right = len(arr)
@@ -207,12 +231,13 @@ def lower_bound(arr, x):
     else:
         return lower
 
+
 # print(lower_bound([1,2,3,4,5,6,8,9], 7))
 # print(lower_bound([1,2,3,4,5,6,7,8,9], 1))
 # print(lower_bound([1,2,3,4,5,6,7,8,9], 100))
 # print(lower_bound([1,2,3,4,5,6,7,8,9], 9))
 # print(lower_bound([1,2,3,4,5,6,7,8,9], 0))
-    
+
 
 # Exercise 224
 def partition_zero(arr):
@@ -221,15 +246,17 @@ def partition_zero(arr):
         if arr[i] < 0:
             arr[i], arr[j] = arr[j], arr[i]
             j += 1
-    
+
     for i in range(j - 1, len(arr)):
         if arr[i] == 0:
             arr[i], arr[j] = arr[j], arr[i]
             j += 1
-    
+
     return arr
 
+
 # print(partition_zero([2, 5, 0, -1, 3, -7, 0, 3, -1, 10]))
+
 
 # Exercise 208
 def sort_special(arr):
@@ -261,10 +288,9 @@ def sort_special(arr):
     for i in range(0, len(arr)):
         if arr[i] == d:
             arr[i], arr[j] = arr[j], arr[i]
-            j += 1 
+            j += 1
     return arr
 
-  
 
 # print(sort_special([1,2,3,4,1,2,3,4,1,2,3,4,2,1,3,4]))
 
@@ -283,14 +309,16 @@ def sum_of_three(arr, s):
             elif arr[i] + arr[j] + arr[k] == s:
                 return True
             elif arr[i] + arr[j] + arr[k] > s:
-                 k -= 1
+                k -= 1
             else:
                 j += 1
-    return False  
+    return False
+
 
 # print(sum_of_three([1,3,8], 10))
 # print(sum_of_three([1,3,8], 12))
 # print(sum_of_three([8, 12, 3, 9, 1, 4], 10))
+
 
 # Exercise 193
 def maximal_distance(arr):
@@ -303,18 +331,20 @@ def maximal_distance(arr):
             min = arr[i]
         if arr[i] > max:
             max = arr[i]
-    return max - min 
+    return max - min
+
 
 # print(maximal_distance([1,2,3,4,5,6,7,8,9]))
 
 # Queue
-Q = [None]*100   # fixed-size array to store the elements in the queue
+Q = [None] * 100  # fixed-size array to store the elements in the queue
 
-Front = 0        # points to the element that is in front of the queue
+Front = 0  # points to the element that is in front of the queue
 
-Back = 0         # points to the first element past the last in the
-                 # queue, which is where you would enqueue the next
-                 # element
+Back = 0  # points to the first element past the last in the
+# queue, which is where you would enqueue the next
+# element
+
 
 def next(p):
     global Q
@@ -323,30 +353,31 @@ def next(p):
         p = 0
     return p
 
+
 def is_empty():
     global Front, Back
     return Front == Back
+
 
 def is_full():
     global Front, Back
     return next(Back) == Front
 
+
 def enqueue(x):
     global Q, Front, Back
     if is_full():
-        print('queue full')
+        print("queue full")
     else:
         Q[Back] = x
         Back = next(Back)
 
+
 def dequeue():
     global Q, Front, Back
     if is_empty():
-        print('queue empty')
+        print("queue empty")
     else:
         x = Q[Front]
         Front = next(Front)
         return x
-
-
-
