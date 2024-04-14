@@ -56,7 +56,7 @@ def find_difference(arr, x):
 A = [1, 2, 1, 2, 1, 2, 1, 2, 3, 0]
 B = [9, 8, 6, 3, 8, 0, 1, 2, 4, 2]
 
-# print(find_median(A))
+print(find_median(A))
 # print(better_algo_x(B,2))
 
 # print(find_difference([1,2,3,4,5,6,7,8,9], 4))

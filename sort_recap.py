@@ -11,7 +11,8 @@ def heapify(arr, parent, end):
 
     if parent != largest:
         arr[parent], arr[largest] = arr[largest], arr[parent]
-        heapify(arr, largest, end) 
+        heapify(arr, largest, end)
+
 
 def heap_sort(arr):
     end = len(arr)
@@ -20,13 +21,15 @@ def heap_sort(arr):
         heapify(arr, i, end)
 
     for j in range(end - 1, -1, -1):
-        arr[0], arr[j] =  arr[j], arr[0] 
+        arr[0], arr[j] = arr[j], arr[0]
         heapify(arr, 0, j)
     return arr
 
-#print(heap_sort([90,10,30,20,50,70,40,30,40,100,50]))
 
-def partition(arr, low, high):
+# print(heap_sort([90,10,30,20,50,70,40,30,40,100,50]))
+
+
+def partition_(arr, low, high):
     j = low - 1
     pivot = arr[high]
     for i in range(low, high):
@@ -36,22 +39,24 @@ def partition(arr, low, high):
     arr[j + 1], arr[high] = arr[high], arr[j + 1]
     return j + 1
 
-def quick_sort(arr, low, high):
+
+def quick_sort_(arr, low, high, decreasing):
     if low < high:
-        pivot_index = partition(arr, low, high)
-        quick_sort(arr, low, pivot_index - 1)
-        quick_sort(arr, pivot_index + 1, high)
+        pivot_index = partition_(arr, low, high, decreasing)
+        quick_sort_(arr, low, pivot_index - 1, decreasing)
+        quick_sort_(arr, pivot_index + 1, high, decreasing)
     return arr
 
+
 def quick_sorted(arr):
-    return quick_sort(arr, 0, len(arr) - 1)
+    return quick_sort_(arr, 0, len(arr) - 1, False)
+
 
 # print(quick_sorted([90,10,30,20,50,70,40,30,40,100,50]))
 
 
-
 def max_heapify(arr, parent, end):
-    largest = parent 
+    largest = parent
     left = parent * 2 + 1
     right = parent * 2 + 2
 
@@ -72,6 +77,7 @@ def max_heap_insert(arr, x):
     for i in range(end // 2 - 1, -1, -1):
         max_heapify(arr, i, end)
     return arr
+
 
 H = [3, 7, 3, 2, 9, 5, 9, 8, 5, 2, 9, 4, 7, 3, 9]
 
@@ -124,19 +130,21 @@ H = [3, 7, 3, 2, 9, 5, 9, 8, 5, 2, 9, 4, 7, 3, 9]
 
 
 # exercise 243
-def reverse(arr, start, end):
+def reversing(arr, start, end):
     while start < end:
         arr[start], arr[end] = arr[end], arr[start]
         start += 1
         end -= 1
 
+
 def rotate_inplace(arr, k):
     n = len(arr)
-    k = k % n  
-    reverse(arr, 0, k - 1) 
-    reverse(arr, k, n - 1)  
-    reverse(arr, 0, n - 1) 
+    k = k % n
+    reversing(arr, 0, k - 1)
+    reversing(arr, k, n - 1)
+    reversing(arr, 0, n - 1)
     return arr
+
 
 # print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 0))
 # print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 1))
@@ -144,15 +152,20 @@ def rotate_inplace(arr, k):
 # print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3))
 # print(rotate_inplace([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 4))
 
+
 # exercise 244
 def increasing(arr):
     for i in range(0, len(arr) - 1):
         if arr[i] > arr[i + 1]:
             return False
+
+
 def decreasing(arr):
     for i in range(0, len(arr) - 1):
         if arr[i] < arr[i + 1]:
             return False
+
+
 def is_sorted(arr):
     if increasing(arr) == False and decreasing(arr) == False:
         return False
@@ -164,6 +177,7 @@ def is_sorted(arr):
 # print(is_sorted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
 # print(is_sorted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 # print(is_sorted([3, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+
 
 def square_root(n):
     min = -1
@@ -193,19 +207,17 @@ def square_root(n):
 # print(square_root(169))
 
 
-
-
-
 def original_elments(arr):
     count = 0
     n = len(arr) - 1
     i = 0
-    quick_sort(arr, i, n)
+    quick_sort(arr, i, n, False)
     while i <= n:
         if (arr[i] != arr[i - 1] or i == 0) and (i == n or arr[i] != arr[i + 1]):
             count += 1
         i += 1
     return count
+
 
 # print(original_elments([1,2,3,4,5,6])) #6
 # print(original_elments([1,2,3,4,6,6])) #4
@@ -214,12 +226,14 @@ def original_elments(arr):
 # print(original_elments([3, 2, 3, 3, 2])) #0
 # print(original_elments([9, 8, 9, 6, 7, 1, 7])) #3
 
+
 def reverse(arr, begin, end):
     while begin < end:
         arr[begin], arr[end] = arr[end], arr[begin]
         begin += 1
         end -= 1
     return arr
+
 
 def shift_right(arr, k):
     reverse(arr, 0, len(arr) - 1)
@@ -274,6 +288,7 @@ def shift_right(arr, k):
 
 #     return arr
 
+
 def partition(arr, begin, end, reversed):
     pivot = arr[end]
     j = begin - 1
@@ -285,9 +300,10 @@ def partition(arr, begin, end, reversed):
         elif reversed == False:
             if arr[i] <= pivot:
                 j += 1
-                arr[j], arr[i] = arr[i], arr[j] 
+                arr[j], arr[i] = arr[i], arr[j]
     arr[j + 1], arr[end] = arr[end], arr[j + 1]
     return j + 1
+
 
 def quick_sort(arr, begin, end, reversed):
     if begin < end:
@@ -296,12 +312,14 @@ def quick_sort(arr, begin, end, reversed):
         quick_sort(arr, pivot_index + 1, end, reversed)
     return arr
 
+
 def peak_order(arr):
-    quick_sort(arr, 0, len(arr) // 2 - 1, False)  
+    quick_sort(arr, 0, len(arr) // 2 - 1, False)
     quick_sort(arr, len(arr) // 2, len(arr) - 1, True)
     return arr
 
-print(peak_order([9,5,3,4,6,8,7,1,0,3,8,3,2,3,5,7,9,9]))
+
+print(peak_order([9, 5, 3, 4, 6, 8, 7, 1, 0, 3, 8, 3, 2, 3, 5, 7, 9, 9]))
 
 # A = [0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,9,8,1,3,4]
 # print(peak_sort(A, len(A) // 2, len(A), False))
