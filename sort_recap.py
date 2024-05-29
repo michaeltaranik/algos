@@ -29,7 +29,7 @@ def heap_sort(arr):
 # print(heap_sort([90,10,30,20,50,70,40,30,40,100,50]))
 
 
-def partition_(arr, low, high):
+def partition_(arr, low, high, decreasing):
     j = low - 1
     pivot = arr[high]
     for i in range(low, high):

@@ -381,3 +381,6 @@ def dequeue():
         x = Q[Front]
         Front = next(Front)
         return x
+
+
+# def sort_e_top(arr)
